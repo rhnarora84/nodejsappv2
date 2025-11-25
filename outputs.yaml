@@ -1,0 +1,26 @@
+
+Parameters:
+  InstanceTypeParameter:
+    Description: Choose either between t2.micro or t3.micro
+    Type: String
+    Default: t2.micro
+    AllowedValues:
+    - t2.micro
+    - t3.micro
+Resources:
+  MyEC2Instance:
+    Type: 'AWS::EC2::Instance'
+    Properties:
+      ImageId: ami-01a612f2c60d80101
+      KeyName: frank-kp
+      InstanceType: !Ref InstanceTypeParameter
+Outputs:
+  MyInstanceId:
+    Description: The Instance ID
+    Value: !Ref MyEC2Instance
+  MyInstancePublicIp:
+    Description: The Instance Public Ip Address
+    Value: !GetAtt MyEC2Instance.PublicIp
+  MyInstancePublicDNS:
+    Description: The Instance Public DNS Name
+    Value: !GetAtt MyEC2Instance.PublicDnsName
